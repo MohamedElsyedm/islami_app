@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:islami_app/app_theme.dart';
 
 class RadioItem extends StatefulWidget {
-  const RadioItem({super.key});
+  String name;
+  RadioItem(this.name);
 
   @override
   State<RadioItem> createState() => _RadioItemState();
@@ -11,18 +12,17 @@ class RadioItem extends StatefulWidget {
 class _RadioItemState extends State<RadioItem> {
   bool playClick = false;
   bool volumeClick = false;
-  // bool _isFavorite = false; // Initial state: not favorited
 
   void _toggleVolume() {
     setState(() {
-      volumeClick = !volumeClick; // Toggle the boolean value
+      volumeClick = !volumeClick;
     });
     print(volumeClick);
   }
 
   void _togglePlay() {
     setState(() {
-      playClick = !playClick; // Toggle the boolean value
+      playClick = !playClick;
     });
     print(playClick);
   }
@@ -50,7 +50,8 @@ class _RadioItemState extends State<RadioItem> {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             Text(
-              'Radio Ibrahim Al-Akdar',
+              widget.name,
+              textAlign: TextAlign.center,
               style: Theme.of(
                 context,
               ).textTheme.titleLarge!.copyWith(color: AppTheme.black),
@@ -64,12 +65,7 @@ class _RadioItemState extends State<RadioItem> {
                   icon: playClick ? Icon(Icons.pause) : Icon(Icons.play_arrow),
                 ),
                 IconButton(
-                  onPressed: () {
-                    // Your click logic here
-                    print('Button clicked!');
-                    _toggleVolume();
-                    print(volumeClick);
-                  },
+                  onPressed: _toggleVolume,
                   icon: Icon(
                     volumeClick
                         ? Icons.volume_off_rounded

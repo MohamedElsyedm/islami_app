@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:islami_app/tabs/radio/radio_item.dart';
+import 'package:islami_app/tabs/radio/radio_services.dart';
 
 class RadioTabBarView extends StatelessWidget {
   const RadioTabBarView({super.key});
@@ -9,9 +10,9 @@ class RadioTabBarView extends StatelessWidget {
     return ListView.separated(
       separatorBuilder: (context, index) =>
           Divider(height: 8, color: Colors.transparent),
-      itemCount: 6,
+      itemCount: RadioServices.radioListNames.length,
       itemBuilder: (_, index) {
-        return RadioItem();
+        return RadioItem(RadioServices.radioListNames[index]);
       },
     );
   }
