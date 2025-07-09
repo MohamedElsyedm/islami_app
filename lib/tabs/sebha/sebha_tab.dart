@@ -22,7 +22,7 @@ class _SebhaTabState extends State<SebhaTab>
     'الله أكبر',
     'استغفر الله',
     'لا إله إلا الله',
-  ];
+  ]; //we can let the user add more in list latter
   int indexList = 0;
   int counter = 0;
 
@@ -68,7 +68,6 @@ class _SebhaTabState extends State<SebhaTab>
     }
     counter++;
 
-    // Only start the animation if it's not already running
     //start the animation when click, one by one
     if (!_controller.isAnimating) {
       _controller.forward();
