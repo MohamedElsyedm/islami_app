@@ -3,7 +3,7 @@ import 'package:islami_app/tabs/quran/sura.dart';
 
 class SuraItem extends StatelessWidget {
   Sura sura;
-  SuraItem(this.sura);
+  SuraItem(this.sura, {super.key});
 
   @override
   Widget build(BuildContext context) {

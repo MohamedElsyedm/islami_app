@@ -4,6 +4,8 @@ import 'package:islami_app/tabs/quran/sura.dart';
 
 class SuraDetailsScreen extends StatelessWidget {
   static const String routName = '/sura_details_screen';
+
+  const SuraDetailsScreen({super.key});
   @override
   Widget build(BuildContext context) {
     Sura sura = ModalRoute.of(context)!.settings.arguments as Sura;

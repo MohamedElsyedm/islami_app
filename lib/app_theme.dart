@@ -31,6 +31,11 @@ class AppTheme {
       selectedItemColor: white,
     ),
     textTheme: TextTheme(
+      headlineLarge: TextStyle(
+        fontSize: 36,
+        fontWeight: FontWeight.bold,
+        color: white,
+      ),
       headlineSmall: TextStyle(
         fontSize: 24,
         fontWeight: FontWeight.bold,
