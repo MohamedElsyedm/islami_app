@@ -9,6 +9,7 @@ class AppTheme {
   static ThemeData darkTheme = ThemeData(
     primaryColor: primary,
     scaffoldBackgroundColor: black,
+
     appBarTheme: AppBarTheme(
       backgroundColor: black,
       foregroundColor: primary,
@@ -42,7 +43,7 @@ class AppTheme {
         color: white,
       ),
       titleLarge: TextStyle(
-        fontSize: 16,
+        fontSize: 20,
         fontWeight: FontWeight.bold,
         color: white,
       ),
