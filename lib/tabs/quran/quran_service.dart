@@ -364,6 +364,6 @@ class QuranService {
     num: index + 1,
   );
 
-  static String loadSuraFile(int suraNum) =>
+  static Future<String> loadSuraFile(int suraNum) =>
       rootBundle.loadString('assets/text/$suraNum.txt');
 }

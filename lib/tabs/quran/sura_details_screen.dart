@@ -1,14 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:islami_app/app_theme.dart';
+import 'package:islami_app/tabs/quran/quran_service.dart';
 import 'package:islami_app/tabs/quran/sura.dart';
+import 'package:islami_app/widgwts/loading_indicator.dart';
 
-class SuraDetailsScreen extends StatelessWidget {
+class SuraDetailsScreen extends StatefulWidget {
   static const String routName = '/sura_details_screen';
 
-  const SuraDetailsScreen({super.key});
+  @override
+  State<SuraDetailsScreen> createState() => _SuraDetailsScreenState();
+}
+
+class _SuraDetailsScreenState extends State<SuraDetailsScreen> {
+  List<String> ayat = [];
+
+  late Sura sura;
+
   @override
   Widget build(BuildContext context) {
-    Sura sura = ModalRoute.of(context)!.settings.arguments as Sura;
+    sura = ModalRoute.of(context)!.settings.arguments as Sura;
+    if (ayat.isEmpty) {
+      loadSura();
+    }
     TextTheme textTheme = Theme.of(context).textTheme;
     double screenHeight = MediaQuery.sizeOf(context).height;
     return Scaffold(
@@ -39,8 +52,23 @@ class SuraDetailsScreen extends StatelessWidget {
               ],
             ),
           ),
-
-          Spacer(),
+          Expanded(
+            child: ayat.isEmpty
+                ? LoadingIndicator()
+                : ListView.separated(
+                    padding: EdgeInsets.symmetric(horizontal: 20),
+                    separatorBuilder: (_, _) => SizedBox(height: 12),
+                    itemCount: ayat.length,
+                    itemBuilder: (_, index) => Text(
+                      ayat[index],
+                      textAlign: TextAlign.center,
+                      textDirection: TextDirection.rtl,
+                      style: textTheme.titleLarge!.copyWith(
+                        color: AppTheme.primary,
+                      ),
+                    ),
+                  ),
+          ),
           Image.asset(
             'assets/images/details_footer.png',
             width: double.infinity,
@@ -48,5 +76,12 @@ class SuraDetailsScreen extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  Future<void> loadSura() async {
+    String suraFileContent = await QuranService.loadSuraFile(sura.num);
+    ayat = suraFileContent.split('\n');
+    print(ayat);
+    setState(() {});
   }
 }
