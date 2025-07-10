@@ -2,20 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:islami_app/nav_bar_selected_icon.dart';
 import 'package:islami_app/nav_bar_unselected_icon.dart';
 import 'package:islami_app/tabs/hadith_tab.dart';
-import 'package:islami_app/tabs/quran_tab.dart';
-import 'package:islami_app/tabs/radio_tab.dart';
-import 'package:islami_app/tabs/sebha_tab.dart';
+import 'package:islami_app/tabs/quran/quran_tab.dart';
+import 'package:islami_app/tabs/radio/radio_tab.dart';
+import 'package:islami_app/tabs/sebha/sebha_tab.dart';
 import 'package:islami_app/tabs/time_tab.dart';
 
 class HomeScreen extends StatefulWidget {
-  static const String routName = 'RoutName Screen';
+  static const String routName = '/RoutName Screen';
+
+  const HomeScreen({super.key});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  //u should not but it at build widget & this is the right place
+  //u should not put it at build widget & this is the right place
   // because when make setState it rebuild build widget and rebuild
   // selectedIndex too to be 0
   // ,so it will not be changed forever
@@ -27,6 +29,14 @@ class _HomeScreenState extends State<HomeScreen> {
     SebhaTab(),
     RadioTab(),
     TimeTab(),
+  ];
+
+  List<String> imageBackground = [
+    'quran_background',
+    'hadith_background',
+    'sebha_background',
+    'radio_background',
+    'time_background',
   ];
 
   @override
@@ -67,7 +77,27 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ],
       ),
-      body: tabs[selectedIndex],
+      body: Container(
+        width: double.infinity,
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            fit: BoxFit.fill,
+            image: AssetImage(
+              'assets/images/${imageBackground[selectedIndex]}.png',
+            ),
+          ),
+        ),
+        child: Column(
+          children: [
+            Image.asset(
+              'assets/images/header.png',
+              height: MediaQuery.sizeOf(context).height * 0.15,
+              fit: BoxFit.fitWidth,
+            ),
+            Expanded(child: tabs[selectedIndex]),
+          ],
+        ),
+      ),
     );
   }
 }
