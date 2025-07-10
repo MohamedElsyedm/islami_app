@@ -25,6 +25,7 @@ class _QuranTabState extends State<QuranTab> {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: TextField(
+            cursorColor: AppTheme.primary,
             //changed text called query
             onChanged: (query) {
               QuranService.searchSura(query);
