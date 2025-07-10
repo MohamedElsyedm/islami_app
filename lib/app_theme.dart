@@ -31,6 +31,23 @@ class AppTheme {
       ///label color
       selectedItemColor: white,
     ),
+    inputDecorationTheme: InputDecorationTheme(
+      fillColor: black.withValues(alpha: 0.7),
+      filled: true,
+      hintStyle: TextStyle(
+        fontSize: 16,
+        fontWeight: FontWeight.bold,
+        color: white.withValues(alpha: 0.6),
+      ),
+      enabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(25),
+        borderSide: BorderSide(color: primary, width: 1),
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(25),
+        borderSide: BorderSide(color: primary, width: 1),
+      ),
+    ),
     textTheme: TextTheme(
       headlineLarge: TextStyle(
         fontSize: 36,
