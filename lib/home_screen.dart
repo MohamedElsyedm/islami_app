@@ -17,7 +17,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  //u should not but it at build widget & this is the right place
+  //u should not put it at build widget & this is the right place
   // because when make setState it rebuild build widget and rebuild
   // selectedIndex too to be 0
   // ,so it will not be changed forever

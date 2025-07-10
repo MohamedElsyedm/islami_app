@@ -20,46 +20,50 @@ class _SebhaTabState extends State<SebhaTab>
     'سبحان الله',
     'الحمد لله',
     'الله أكبر',
-    'استغفر الله',
-    'لا إله إلا الله',
+    // 'استغفر الله',
+    // 'لا إله إلا الله',
   ]; //we can let the user add more in list latter
   int indexList = 0;
   int counter = 0;
 
+  /// we use init state because the single ticker used once
+  /// so we can declare it once and updating angel and reanimate it with new angel
+  /// in calling onTap() function
   @override
   void initState() {
     super.initState();
+
+    /// Speed of each incremental rotation
     _controller = AnimationController(
-      duration: const Duration(
-        milliseconds: 100, // Speed of each incremental rotation
-      ),
-      vsync:
-          this, //'this' refers to the State object, which is a TickerProvider
+      duration: const Duration(milliseconds: 100),
+
+      //'this' refers to the State object, which is a TickerProvider
       // this line shows how to animate the rotation
+      vsync: this,
     );
 
-    // The animation will always go from 0 to _angleIncrement
-    // This represents the *change* in angle for each click
-    _animation = Tween<double>(begin: 0.0, end: _angleIncrement).animate(_controller)
-      ..addListener(() {
-        setState(() {
-          // Trigger a rebuild to apply the current animation value
-        });
-      })
-      ..addStatusListener((status) {
-        if (status == AnimationStatus.completed) {
-          // When the animation completes, update the total accumulated angle
-          _currentRotationAngle += _angleIncrement;
-          // Important: Reset the controller so it's ready to animate the next increment
-          _controller.reset();
-        }
-      });
+    /// The animation will always go from 0 to _angleIncrement
+    /// This represents the *change* in angle for each click
+    /// when animate it rebuild when angel changed
+    /// and it status completed angel increment
+    /// and then reset the controller to start animate on new angel
+    _animation =
+        Tween<double>(begin: 0.0, end: _angleIncrement).animate(_controller)
+          ..addListener(() {
+            setState(() {});
+          })
+          ..addStatusListener((status) {
+            if (status == AnimationStatus.completed) {
+              _currentRotationAngle += _angleIncrement;
+              _controller.reset();
+            }
+          });
   }
 
   void onTap() {
     if (counter % 33 == 0 && counter != 0) {
       print(counter);
-      if (indexList > sebhaStatements.length) {
+      if (indexList >= sebhaStatements.length - 1) {
         indexList = 0;
       } else {
         indexList++;
@@ -98,9 +102,10 @@ class _SebhaTabState extends State<SebhaTab>
           ),
           InkWell(
             onTap: () => onTap(),
-            splashColor: Colors.transparent, // Removes the ripple effect
-            highlightColor: Colors
-                .transparent, // Removes the solid highlight color when held down
+
+            // remove click effect
+            splashColor: Colors.transparent,
+            highlightColor: Colors.transparent,
 
             child: Stack(
               alignment: Alignment.center,
