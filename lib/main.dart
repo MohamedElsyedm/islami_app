@@ -1,14 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:islami_app/app_theme.dart';
 import 'package:islami_app/home_screen.dart';
+import 'package:islami_app/on_boarding_screen/onboarding_screen.dart';
 import 'package:islami_app/tabs/quran/sura_details_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-void main() {
-  runApp(const IslamiApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+
+  bool onboardingComplete = prefs.getBool('onboarding_complete') ?? false;
+  runApp(IslamiApp(onboardingComplete: onboardingComplete));
 }
 
 class IslamiApp extends StatelessWidget {
-  const IslamiApp({super.key});
+  final bool onboardingComplete;
+  const IslamiApp({super.key, required this.onboardingComplete});
 
   @override
   Widget build(BuildContext context) {
@@ -20,8 +27,11 @@ class IslamiApp extends StatelessWidget {
       routes: {
         HomeScreen.routName: (_) => HomeScreen(),
         SuraDetailsScreen.routName: (_) => SuraDetailsScreen(),
+        OnboardingScreen.routName: (_) => OnboardingScreen(),
       },
-      initialRoute: HomeScreen.routName,
+      initialRoute: onboardingComplete
+          ? HomeScreen.routName
+          : OnboardingScreen.routName,
       theme: ThemeData.light(), //light mode
       darkTheme: AppTheme.darkTheme, //dark mode
       themeMode: ThemeMode.dark,

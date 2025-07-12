@@ -48,6 +48,9 @@ class AppTheme {
         borderSide: BorderSide(color: primary, width: 1),
       ),
     ),
+    textButtonTheme: TextButtonThemeData(
+      style: TextButton.styleFrom(foregroundColor: primary),
+    ),
     textTheme: TextTheme(
       headlineLarge: TextStyle(
         fontSize: 36,

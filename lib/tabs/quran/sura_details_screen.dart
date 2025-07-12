@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:islami_app/app_theme.dart';
 import 'package:islami_app/tabs/quran/quran_service.dart';
 import 'package:islami_app/tabs/quran/sura.dart';
-import 'package:islami_app/widgwts/loading_indicator.dart';
+import 'package:islami_app/widgets/loading_indicator.dart';
 
 class SuraDetailsScreen extends StatefulWidget {
   static const String routName = '/sura_details_screen';
