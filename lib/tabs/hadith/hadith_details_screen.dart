@@ -25,10 +25,13 @@ class HadithDetailsScreen extends StatelessWidget {
                   height: screenHeight * 0.1,
                   fit: BoxFit.fill,
                 ),
-                Text(
-                  hadith.title,
-                  style: textTheme.headlineSmall!.copyWith(
-                    color: AppTheme.primary,
+                Expanded(
+                  child: Text(
+                    hadith.title,
+                    style: textTheme.headlineSmall!.copyWith(
+                      color: AppTheme.primary,
+                    ),
+                    textAlign: TextAlign.center,
                   ),
                 ),
                 Image.asset(
