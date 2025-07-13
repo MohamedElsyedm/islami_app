@@ -1,5 +1,6 @@
 import 'package:flutter/services.dart';
 import 'package:islami_app/tabs/quran/sura.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class QuranService {
   static List<String> arabicSuraNames = [
@@ -356,6 +357,8 @@ class QuranService {
     (index) => getSuraFromIndex(index),
   );
 
+  static List<Sura> mostREcentlySuras = [];
+
   //create one element
   static Sura getSuraFromIndex(int index) => Sura(
     arabicName: arabicSuraNames[index],
@@ -366,6 +369,10 @@ class QuranService {
 
   //
   static void searchSura(String query) {
+    /// when list clear and refill with the same data
+    /// if we compare two objects will not be the same
+    /// that because the stories of that data are not the same (buffering)
+    /// check by reference not value nor attribute
     suraSearchResults.clear();
     for (int i = 0; i < 114; i++) {
       if (arabicSuraNames[i].contains(query) ||
@@ -378,4 +385,45 @@ class QuranService {
 
   static Future<String> loadSuraFile(int suraNum) =>
       rootBundle.loadString('assets/text/$suraNum.txt');
+
+  static Future<void> getMostRecently() async {
+    SharedPreferences sharedPref = await SharedPreferences.getInstance();
+    List<String>? mostRecentlyIndexes = sharedPref.getStringList(
+      'mostRecentlyIndexes',
+    );
+    //first time run app the list will be null so should handle it
+    if (mostRecentlyIndexes == null) return;
+    mostREcentlySuras = mostRecentlyIndexes.map((indexString) {
+      int index = int.parse(indexString);
+      Sura sura = getSuraFromIndex(index);
+      return sura;
+    }).toList();
+  }
+
+  static Future<void> addSuraToMostRecently(Sura sura) async {
+    //loop on list to compare element in object not all object
+    //return bool value
+
+    bool alreadyExist = mostREcentlySuras.any(
+      (mostREcentlySura) => mostREcentlySura.num == sura.num,
+    );
+    if (!alreadyExist) {
+      mostREcentlySuras.add(sura); //add element to end of list
+      // mostREcentlySuras.insert(0, sura); add element to start of list
+
+      //map can convert list<type> to another type
+      List<String> mostRecentlyIndexes = mostREcentlySuras
+          .map((sura) => (sura.num - 1).toString())
+          .toList();
+      SharedPreferences sharedPref = await SharedPreferences.getInstance();
+      sharedPref.setStringList('mostRecentlyIndexes', mostRecentlyIndexes);
+    }
+  }
 }
+
+/*
+what is the difference between plugin and package 
+plugin => contains native code 
+package => not contain native code dart only
+
+ */

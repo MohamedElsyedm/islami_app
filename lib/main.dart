@@ -2,14 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:islami_app/app_theme.dart';
 import 'package:islami_app/home_screen.dart';
 import 'package:islami_app/on_boarding_screen/onboarding_screen.dart';
+import 'package:islami_app/tabs/quran/quran_service.dart';
 import 'package:islami_app/tabs/quran/sura_details_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-void main() async {
+Future<void> main() async {
+  // this line should be if there (async await) at main function
   WidgetsFlutterBinding.ensureInitialized();
   SharedPreferences prefs = await SharedPreferences.getInstance();
-
+  await QuranService.getMostRecently();
   bool onboardingComplete = prefs.getBool('onboarding_complete') ?? false;
+
   runApp(IslamiApp(onboardingComplete: onboardingComplete));
 }
 
