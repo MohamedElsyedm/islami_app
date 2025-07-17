@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:islami_app/app_theme.dart';
 
 class RadioItem extends StatefulWidget {
-  String name;
-  RadioItem(this.name);
+  final String name;
+  const RadioItem(this.name);
 
   @override
   State<RadioItem> createState() => _RadioItemState();

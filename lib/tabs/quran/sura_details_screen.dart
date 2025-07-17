@@ -60,9 +60,9 @@ class _SuraDetailsScreenState extends State<SuraDetailsScreen> {
                     separatorBuilder: (_, _) => SizedBox(height: 12),
                     itemCount: ayat.length,
                     itemBuilder: (_, index) => Text(
-                      ayat[index],
+                      '${ayat[index]}[${index + 1}]',
                       textAlign: TextAlign.center,
-                      textDirection: TextDirection.rtl,
+                      textDirection: TextDirection.ltr,
                       style: textTheme.titleLarge!.copyWith(
                         color: AppTheme.primary,
                       ),
@@ -81,6 +81,7 @@ class _SuraDetailsScreenState extends State<SuraDetailsScreen> {
   Future<void> loadSura() async {
     String suraFileContent = await QuranService.loadSuraFile(sura.num);
     ayat = suraFileContent.split('\n');
+    ayat = ayat.where((element) => element.trim().isNotEmpty).toList();
     print(ayat);
     setState(() {});
   }

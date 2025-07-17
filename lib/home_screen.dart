@@ -5,7 +5,7 @@ import 'package:islami_app/tabs/hadith/hadith_tab.dart';
 import 'package:islami_app/tabs/quran/quran_tab.dart';
 import 'package:islami_app/tabs/radio/radio_tab.dart';
 import 'package:islami_app/tabs/sebha/sebha_tab.dart';
-import 'package:islami_app/tabs/time_tab.dart';
+import 'package:islami_app/time/time_tab.dart';
 
 class HomeScreen extends StatefulWidget {
   static const String routName = '/RoutName Screen';
