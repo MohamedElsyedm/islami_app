@@ -3,7 +3,17 @@ import 'package:islami_app/app_theme.dart';
 
 class RadioItem extends StatefulWidget {
   final String name;
-  const RadioItem(this.name);
+  final void Function()? onPlay;
+  final void Function()? onPause;
+  final void Function()? onVolumeOn;
+  final void Function()? onVolumeOff;
+  const RadioItem({
+    required this.name,
+    required this.onPlay,
+    required this.onPause,
+    required this.onVolumeOn,
+    required this.onVolumeOff,
+  });
 
   @override
   State<RadioItem> createState() => _RadioItemState();
@@ -61,11 +71,25 @@ class _RadioItemState extends State<RadioItem> {
               children: [
                 IconButton(
                   iconSize: 44,
-                  onPressed: _togglePlay,
+                  onPressed: () {
+                    _togglePlay();
+                    if (playClick) {
+                      widget.onPlay!();
+                    } else {
+                      widget.onPause!();
+                    }
+                  },
                   icon: playClick ? Icon(Icons.pause) : Icon(Icons.play_arrow),
                 ),
                 IconButton(
-                  onPressed: _toggleVolume,
+                  onPressed: () {
+                    _toggleVolume();
+                    if (volumeClick) {
+                      widget.onVolumeOff!();
+                    } else {
+                      widget.onVolumeOn!();
+                    }
+                  },
                   icon: Icon(
                     volumeClick
                         ? Icons.volume_off_rounded
