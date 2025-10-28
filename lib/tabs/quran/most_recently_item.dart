@@ -20,7 +20,7 @@ class MostRecentlyItem extends StatelessWidget {
       },
       child: Container(
         height: double.infinity,
-        width: screenSize.width * 0.75,
+        width: screenSize.width * 0.76,
         padding: EdgeInsets.only(left: 10),
         decoration: BoxDecoration(
           color: AppTheme.primary,

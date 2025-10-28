@@ -37,6 +37,11 @@ dependencies:
   flutter_svg: ^2.2.0
   shared_preferences: ^2.5.3
   carousel_slider: ^5.1.1
+  http: ^1.5.0
+  intl: ^0.20.2
+  just_audio: ^0.10.5
+  dropdown_button2: ^2.3.9
+  audio_service: ^0.18.18
 
 dev_dependencies:
   flutter_test:
@@ -67,6 +72,7 @@ flutter:
     - assets/images/
     - assets/icons/
     - assets/text/
+    - assets/files/azkar/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

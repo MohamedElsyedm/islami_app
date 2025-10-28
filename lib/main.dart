@@ -8,7 +8,6 @@ import 'package:islami_app/tabs/quran/sura_details_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 Future<void> main() async {
-  // this line should be if there (async await) at main function
   WidgetsFlutterBinding.ensureInitialized();
   SharedPreferences prefs = await SharedPreferences.getInstance();
   await QuranService.getMostRecently();

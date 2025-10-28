@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 class AppTheme {
   static const Color primary = Color(0xFFE2BE7F);
   static const Color black = Color(0xFF202020);
+  static const Color primaryOff = Color(0xFFB19768);
   static const Color white = Color(0xFFFFFFFF);
+  static const Color brown = Color(0xFF856B3F);
 
   static ThemeData lightTheme = ThemeData.light();
   static ThemeData darkTheme = ThemeData(
@@ -54,6 +56,11 @@ class AppTheme {
     textTheme: TextTheme(
       headlineLarge: TextStyle(
         fontSize: 36,
+        fontWeight: FontWeight.bold,
+        color: white,
+      ),
+      headlineMedium: TextStyle(
+        fontSize: 32,
         fontWeight: FontWeight.bold,
         color: white,
       ),
